@@ -1,0 +1,2 @@
+rootProject.name='listview_learn'
+include ':app'

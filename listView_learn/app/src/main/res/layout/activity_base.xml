@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/lds_title_base"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:paddingTop="28dp"
+        android:background="@color/colorAccent"
+        >
+
+
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/lds_content_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
