@@ -3,8 +3,10 @@ package com.dangerdasheng.android_frame.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Build;
 import android.provider.SyncStateContract;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,9 +22,12 @@ import androidx.core.content.ContextCompat;
  * Updated by lds on 2021/4/22
  */
 
+
 public class StatusBarUtil {
     /**
      * 修改状态栏为全透明
+     * decorView是window中的最顶层view，可以从window中通过getDecorView获取到decorView。
+     * 通过decorView获取到程序显示的区域，包括标题栏，但不包括状态栏。间接可以计算状态栏高度。
      */
     public static void trasparencyBar(Activity activity){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -190,7 +195,7 @@ public class StatusBarUtil {
     }
 
     /**
-     * 获得通知栏高度
+     * 获得通知栏高度,通过反射
      */
     public static int getStatusBarHeight(Context context){
         Class<?> c = null;
@@ -198,7 +203,7 @@ public class StatusBarUtil {
         Field field = null;
         int x = 0,statusBarHeight = 0;
         try {
-            c = Class.forName("com.android.internal.R$dimen");
+            c = Class.forName("com.android.internal.R$dimen"); //
             obj = c.newInstance();
             field = c.getField("status_bar_height");
             x = Integer.parseInt(field.get(obj).toString());
@@ -208,6 +213,33 @@ public class StatusBarUtil {
         }
         return statusBarHeight;
     }
+
+    /**
+     * 获得通知栏高度,通过Resources
+     */
+    public static int getStatusBarHeightByResource(Context context) {
+        int statusBarHeight = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
+
+    /**
+     * 获得通知栏高度,应用区top属性
+     * 应用区的顶端位置即状态栏的高度
+     * 注意*该方法不能在初始化的时候用
+     */
+
+    public static int getStatusBarHeightByTop(Activity activity) {
+        Rect rectangle = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rectangle);
+        int statusBarHeight = 0;
+        statusBarHeight = rectangle.top;
+        return statusBarHeight;
+    }
+
 
 
 
