@@ -1,4 +1,4 @@
-package com.dangerdasheng.listView.entity;
+package com.dangerdasheng.android_frame.entity;
 
 public class Machine {
     private String title;

@@ -1,11 +1,10 @@
-package com.dangerdasheng.listView;
+package com.dangerdasheng.android_frame;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.dangerdasheng.listView.base.BaseActivity;
+import com.dangerdasheng.android_frame.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
 
